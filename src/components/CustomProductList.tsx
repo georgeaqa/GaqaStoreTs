@@ -14,7 +14,7 @@ export default function CustomProductList({
     <Pressable className=" w-[50%] p-2 border-primary shadow" onPress={onPress}>
       <Image
         source={{ uri: item.characterImage }}
-        className="w-full h-[200px]"
+        className="w-full aspect-[4/3]"
         resizeMode="contain"
       />
       <CustomText className="text-center text-2xl color-primary">

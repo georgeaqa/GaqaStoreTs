@@ -12,6 +12,10 @@ module.exports = {
         secondary: "#000000",
         tertiary: "#FFFFFF",
       },
+      aspectRatio: {
+        "4/3": "4/3",
+        "3/4": "3/4",
+      },
     },
   },
   plugins: [],

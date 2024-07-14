@@ -1,4 +1,5 @@
 import { Pressable, Text } from "react-native";
+import CustomText from "./CustomText";
 import React from "react";
 
 type CustomButtonProps = {
@@ -9,7 +10,7 @@ type CustomButtonProps = {
 export default function CustomButton({ onPress, children }: CustomButtonProps) {
   return (
     <Pressable onPress={onPress} className="w-full rounded-full bg-primary p-2">
-      <Text className="text-white text-center font-Agbalumo">{children}</Text>
+      <CustomText className="text-white text-center">{children}</CustomText>
     </Pressable>
   );
 }

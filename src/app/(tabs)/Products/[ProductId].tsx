@@ -1,4 +1,4 @@
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Image, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { get_character } from "@/src/lib/characterSupabase";
 import { CustomText, CustomButton } from "@/src/components";
@@ -45,8 +45,13 @@ export default function ProductDetailsScreen() {
       ) : (
         <>
           <Stack.Screen options={{ title: character?.characterName }} />
-          <CustomText className="text-center text-2xl ">
-            {character?.characterName}
+          <Image
+            source={{ uri: character?.characterImage }}
+            className="w-full aspect-3/4"
+            resizeMode="contain"
+          />
+          <CustomText className="text-2xl">
+            {"Precio: S/ " + character?.characterPrice}
           </CustomText>
           <CustomButton>Agregar al carrito</CustomButton>
           <CustomButton> Eliminar del carrito</CustomButton>
