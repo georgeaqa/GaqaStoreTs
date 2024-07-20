@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { Alert } from "react-native";
 
 export async function get_characters() {
   try {
@@ -11,7 +12,7 @@ export async function get_characters() {
     }
     return data;
   } catch (error: any) {
-    throw new Error(error.message);
+    Alert.alert(error.message);
   }
 }
 
@@ -26,6 +27,6 @@ export async function get_character(characterId: string) {
     }
     return data;
   } catch (error: any) {
-    throw new Error(error.message);
+    Alert.alert(error.message);
   }
 }

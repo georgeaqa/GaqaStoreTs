@@ -19,10 +19,10 @@ export async function sign_up_with_password({
     if (error) {
       throw new Error(error.message);
     } else {
-      throw new Error("Registro exitoso");
+      Alert.alert("Registro exitoso", "¡Gracias por registrarte!");
     }
   } catch (error: any) {
-    throw new Error("Error al registrarse:", error.message);
+    Alert.alert("Error al registrarse", error.message);
   }
 }
 
@@ -39,10 +39,10 @@ export async function sign_in_with_password({
     if (error) {
       throw new Error(error.message);
     } else {
-      throw new Error("Inicio de sesión exitoso");
+      Alert.alert("Inicio de sesión exitoso");
     }
   } catch (error: any) {
-    throw new Error("Error al iniciar sesión:", error.message);
+    Alert.alert("Error al iniciar sesión:", error.message);
   }
 }
 
@@ -50,6 +50,6 @@ export async function log_out() {
   try {
     await supabase.auth.signOut();
   } catch (error: any) {
-    throw new Error("Error al desconectarse:", error.message);
+    Alert.alert("Error al desconectarse:", error.message);
   }
 }

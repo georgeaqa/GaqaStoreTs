@@ -2,18 +2,28 @@ import { View } from "react-native";
 import { CustomButton, CustomInput } from "@/src/components";
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "@/src/constants";
+import { sign_up_with_password } from "@/src/lib/authSupabase";
+import { create_profile } from "@/src/lib/profileSupabase";
 import React from "react";
 
 export default function RegisterScreen() {
   const { control, handleSubmit, watch } = useForm();
   const pwd = watch("password");
   const handleSignUpWithPassword = (data: any) => {
-    console.log(data);
+   const aswwerdasd = sign_up_with_password({ email: data.email, password: data.password });
+   console.log(aswwerdasd);
   };
 
   return (
     <View className="flex-1 items-center gap-3 p-1 bg-white">
-      <CustomInput name="nickname" control={control} placeholder="Nickname" />
+      <CustomInput
+        name="nickname"
+        control={control}
+        rules={{
+          required: "Este campo es requerido",
+        }}
+        placeholder="Nickname"
+      />
       <CustomInput name="name" control={control} placeholder="Nombres" />
       <CustomInput name="surname" control={control} placeholder="Apellidos" />
       <CustomInput
