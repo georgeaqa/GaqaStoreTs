@@ -5,7 +5,7 @@ export default function ProductsLayout() {
     <Stack
       screenOptions={{
         headerTitleAlign: "center",
-        headerTitleStyle: { fontFamily: "Agbalumo" },
+        headerTitleStyle: { fontFamily: "Agbalumo", color: "#FF0000" },
       }}
     />
   );

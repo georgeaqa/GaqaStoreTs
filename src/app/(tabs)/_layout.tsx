@@ -2,7 +2,9 @@ import { Tabs, Redirect } from "expo-router";
 import CustomIcon, { Icons } from "@/src/components/CustomIcon";
 import React from "react";
 import { useAuth } from "@/src/providers/Authprovider";
+import { useSelector } from "react-redux";
 export default function TabsLayout() {
+  const cartCharacters = useSelector((state: any) => state.cart.cartCharacters);
   const { user } = useAuth();
   if (!user) {
     return <Redirect href="Login" />;
@@ -25,6 +27,7 @@ export default function TabsLayout() {
       type: Icons.MaterialCommunityIcons,
       activeIcon: "cart",
       inActiveIcon: "cart-outline",
+      badge: cartCharacters.length,
     },
   ];
 
@@ -40,6 +43,7 @@ export default function TabsLayout() {
           key={index}
           name={tab.name}
           options={{
+            tabBarBadge: tab.badge,
             tabBarIcon: ({ color, size, focused }) => (
               <CustomIcon
                 name={focused ? tab.activeIcon : tab.inActiveIcon}

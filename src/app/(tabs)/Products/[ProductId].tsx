@@ -2,6 +2,8 @@ import { ActivityIndicator, Image, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { get_character } from "@/src/lib/characterSupabase";
 import { CustomText, CustomButton } from "@/src/components";
+import { addToCart, removeFromCart } from "@/src/store/actions/cart.action";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 interface Character {
@@ -16,6 +18,9 @@ export default function ProductDetailsScreen() {
   const { ProductId } = useLocalSearchParams();
   const [character, setCharacter] = useState<Character | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const cartCharacters = useSelector((state: any) => state.cart.cartCharacters);
+  const [ifInCart, setIfInCart] = useState(false);
   useEffect(() => {
     async function fetchCharacter() {
       try {
@@ -35,12 +40,31 @@ export default function ProductDetailsScreen() {
     }
     fetchCharacter();
   }, []);
+
+  useEffect(() => {
+    if (character && cartCharacters) {
+      const isInCart = cartCharacters.some(
+        (cartCharacter: any) =>
+          cartCharacter.characterId === character.characterId
+      );
+      setIfInCart(isInCart);
+    }
+  }, [cartCharacters, character]);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(character));
+  };
+
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart(character));
+  };
+
   return (
-    <View className="flex-1 items-center gap-3 p-1 bg-white">
+    <View className="flex-1 items-center justify-center gap-3 p-1 bg-white">
       {isLoading ? (
         <>
           <Stack.Screen options={{ title: "Cargando..." }} />
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" className="color-primary" />
         </>
       ) : (
         <>
@@ -53,8 +77,15 @@ export default function ProductDetailsScreen() {
           <CustomText className="text-2xl">
             {"Precio: S/ " + character?.characterPrice}
           </CustomText>
-          <CustomButton>Agregar al carrito</CustomButton>
-          <CustomButton> Eliminar del carrito</CustomButton>
+          {ifInCart ? (
+            <CustomButton onPress={handleRemoveFromCart}>
+              Eliminar del carrito
+            </CustomButton>
+          ) : (
+            <CustomButton onPress={handleAddToCart}>
+              Agregar al carrito
+            </CustomButton>
+          )}
         </>
       )}
     </View>
