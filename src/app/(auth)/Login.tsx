@@ -3,13 +3,17 @@ import { CustomButton, CustomInput } from "@/src/components";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "@/src/constants";
+import { sign_in_with_password } from "@/src/lib/authSupabase";
 import React from "react";
 
 export default function LoginScreen() {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    sign_in_with_password({
+      email: data.email,
+      password: data.password,
+    });
   };
   return (
     <View className="flex-1 items-center justify-center gap-3 p-1 bg-white">

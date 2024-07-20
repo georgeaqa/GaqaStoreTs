@@ -1,10 +1,10 @@
 import { Pressable, Text } from "react-native";
 import CustomText from "./CustomText";
-import React from "react";
+import React, { ReactNode } from "react";
 
 type CustomButtonProps = {
   onPress?: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 export default function CustomButton({ onPress, children }: CustomButtonProps) {

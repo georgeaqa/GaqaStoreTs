@@ -1,9 +1,19 @@
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
 import CustomIcon, { Icons } from "@/src/components/CustomIcon";
 import React from "react";
-
+import { useAuth } from "@/src/providers/Authprovider";
 export default function TabsLayout() {
+  const { user } = useAuth();
+  if (!user) {
+    return <Redirect href="Login" />;
+  }
   const tabs = [
+    {
+      name: "Profile",
+      type: Icons.Ionicons,
+      activeIcon: "home",
+      inActiveIcon: "home-outline",
+    },
     {
       name: "Products",
       type: Icons.Ionicons,

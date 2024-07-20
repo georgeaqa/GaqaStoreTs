@@ -12,25 +12,11 @@ export default function RegisterScreen() {
     sign_up_with_password({
       email: data.email,
       password: data.password,
-      user_id: null,
-      user_first_name: data.user_first_name,
-      user_last_name: data.user_last_name,
-      user_avatar: null,
     });
   };
 
   return (
     <View className="flex-1 items-center gap-3 p-1 bg-white">
-      <CustomInput
-        name="user_first_name"
-        control={control}
-        placeholder="Nombres"
-      />
-      <CustomInput
-        name="user_last_name"
-        control={control}
-        placeholder="Apellidos"
-      />
       <CustomInput
         name="email"
         control={control}
