@@ -11,7 +11,7 @@ export default function CustomProductList({
   onPress,
 }: CustomProductListProps) {
   return (
-    <Pressable className=" w-[50%] p-2 border-primary shadow" onPress={onPress}>
+    <Pressable className="w-[50%] border-primary shadow" onPress={onPress}>
       <Image
         source={{ uri: item.characterImage }}
         className="w-full aspect-[4/3]"

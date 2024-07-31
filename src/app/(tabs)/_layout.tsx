@@ -23,7 +23,7 @@ export default function TabsLayout() {
       inActiveIcon: "storefront-outline",
     },
     {
-      name: "ShoppingCart",
+      name: "Cart",
       type: Icons.MaterialCommunityIcons,
       activeIcon: "cart",
       inActiveIcon: "cart-outline",
