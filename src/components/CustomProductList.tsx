@@ -1,5 +1,6 @@
-import { Pressable, Image } from "react-native";
+import { Pressable, Image, View } from "react-native";
 import CustomText from "./CustomText";
+import { DIMENSIONS } from "@/src/constants";
 import React from "react";
 
 type CustomProductListProps = {
@@ -11,15 +12,20 @@ export default function CustomProductList({
   onPress,
 }: CustomProductListProps) {
   return (
-    <Pressable className="w-[50%] border-primary shadow" onPress={onPress}>
-      <Image
-        source={{ uri: item.characterImage }}
-        className="w-full aspect-[4/3]"
-        resizeMode="contain"
-      />
-      <CustomText className="text-center text-2xl color-primary">
-        {item.characterName}
-      </CustomText>
-    </Pressable>
+    <View
+      className="items-center justify-center p-1 m-1 border-2 rounded-3xl"
+      style={{ width: (DIMENSIONS.width - 16) / 2 }}
+    >
+      <Pressable onPress={onPress}>
+        <Image
+          source={{ uri: item.characterImage }}
+          className="w-full aspect-[4/3]"
+          resizeMode="contain"
+        />
+        <CustomText className="text-center text-2xl color-primary">
+          {item.characterName}
+        </CustomText>
+      </Pressable>
+    </View>
   );
 }

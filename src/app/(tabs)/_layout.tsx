@@ -7,7 +7,7 @@ export default function TabsLayout() {
   const cartCharacters = useSelector((state: any) => state.cart.cartCharacters);
   const { user } = useAuth();
   if (!user) {
-    return <Redirect href="Login" />;
+    return <Redirect href="/Login" />;
   }
   const tabs = [
     {

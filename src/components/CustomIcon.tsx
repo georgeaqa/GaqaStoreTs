@@ -37,7 +37,7 @@ export const Icons = {
 interface CustomIconProps {
   type: React.ComponentType<any>;
   name: string;
-  color: string;
+  color?: string;
   size?: number;
   style?: string;
 }

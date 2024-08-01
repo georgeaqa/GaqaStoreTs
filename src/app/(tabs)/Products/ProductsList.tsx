@@ -38,7 +38,7 @@ export default function ProductsScreen() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center p-1 bg-white">
+    <View className="flex-1 items-center justify-center bg-white">
       <Stack.Screen
         options={{
           title: "Lista de Productos",
@@ -59,8 +59,6 @@ export default function ProductsScreen() {
           keyExtractor={(item: any) => item.characterId}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          className="w-full"
-          contentContainerStyle={{ gap: 3 }}
           numColumns={2}
         />
       )}
