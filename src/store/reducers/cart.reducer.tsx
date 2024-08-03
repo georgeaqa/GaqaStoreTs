@@ -41,6 +41,43 @@ export default function cartReducer(state = initialState, action: any) {
         cartCharacters: newCartCharactersRemoved,
         total: sumTotal(newCartCharactersRemoved),
       };
+    case INCREMENT_CART_CHARACTER_QUANTITY:
+      const newCartCharactersIncremented = state.cartCharacters.map(
+        (character: any) => {
+          if (character.characterId === action.payload.characterId) {
+            return { ...character, quantity: character.quantity + 1 };
+          } else {
+            return character;
+          }
+        }
+      );
+      return {
+        ...state,
+        cartCharacters: newCartCharactersIncremented,
+        total: sumTotal(newCartCharactersIncremented),
+      };
+    case DECREMENT_CART_CHARACTER_QUANTITY:
+      const newCartCharactersDecremented = state.cartCharacters.map(
+        (character: any) => {
+          if (character.characterId === action.payload.characterId) {
+            const newQuantity = Math.max(character.quantity - 1, 1);
+            return { ...character, quantity: newQuantity };
+          } else {
+            return character;
+          }
+        }
+      );
+      return {
+        ...state,
+        cartCharacters: newCartCharactersDecremented,
+        total: sumTotal(newCartCharactersDecremented),
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartCharacters: [],
+        total: 0,
+      };
     default:
       return state;
   }

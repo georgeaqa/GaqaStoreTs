@@ -18,7 +18,7 @@ export default function RootLayout() {
     <Provider store={store}>
       <AuthProvider>
         <Slot />
-        <StatusBar style="light" />
+        <StatusBar style="auto" />
       </AuthProvider>
     </Provider>
   );
