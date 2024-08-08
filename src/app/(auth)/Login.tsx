@@ -46,10 +46,10 @@ export default function LoginScreen() {
       <CustomButton onPress={handleSubmit(onSubmit)}>
         Iniciar Sesión
       </CustomButton>
-      <CustomButton onPress={() => router.push("Register")}>
+      <CustomButton onPress={() => router.push("/Register")}>
         Registrarse
       </CustomButton>
-      <CustomButton onPress={() => router.push("ForgotPassword")}>
+      <CustomButton onPress={() => router.push("/ForgotPassword")}>
         Recuperar Contraseña
       </CustomButton>
     </View>

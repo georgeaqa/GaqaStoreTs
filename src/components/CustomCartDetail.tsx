@@ -1,6 +1,5 @@
 import { View, Image, Pressable } from "react-native";
 import CustomText from "./CustomText";
-import CustomButton from "./CustomButton";
 import CustomIcon, { Icons } from "./CustomIcon";
 import { DIMENSIONS } from "@/src/constants";
 import {

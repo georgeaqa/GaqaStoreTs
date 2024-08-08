@@ -3,10 +3,14 @@ import { Stack, router } from "expo-router";
 import { get_characters } from "@/src/lib/characterSupabase";
 import { CustomProductList, CustomText } from "@/src/components";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 export default function ProductsScreen() {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchCharacter, setSearchCharacter] = useState("");
+  const cartCharacters = useSelector((state: any) => state.cart.cartCharacters);
+
   useEffect(() => {
     async function fetchCharacters() {
       try {
@@ -29,10 +33,16 @@ export default function ProductsScreen() {
   );
 
   const renderItemCharacter = ({ item }: any) => {
+    const disabled: boolean = cartCharacters.some(
+      (cartCharacter: any) => cartCharacter.characterId === item.characterId
+    );
+
+    const route: any = `/Products/${item.characterId}`;
     return (
       <CustomProductList
         item={item}
-        onPress={() => router.push(`/Products/${item.characterId}`)}
+        onPress={() => router.push(route)}
+        disabled={disabled}
       />
     );
   };

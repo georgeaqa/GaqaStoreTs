@@ -11,10 +11,10 @@ export default function AuthLayout() {
     <Stack
       screenOptions={{
         headerTitleAlign: "center",
-        headerTitleStyle: { fontFamily: "Agbalumo" },
+        headerTitleStyle: { fontFamily: "Agbalumo", color: "#FF0000" },
       }}
     >
-      <Stack.Screen name="Login" options={{ title: "Inicio" }} />
+      <Stack.Screen name="Login" options={{ headerShown: false }} />
       <Stack.Screen name="Register" options={{ title: "Registro" }} />
       <Stack.Screen
         name="ForgotPassword"

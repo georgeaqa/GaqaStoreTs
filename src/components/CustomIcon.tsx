@@ -37,12 +37,12 @@ export const Icons = {
 interface CustomIconProps {
   type: React.ComponentType<any>;
   name: string;
-  color?: string;
-  size?: number;
-  style?: string;
+  color: string;
+  size: number;
+  style: string;
 }
 
-const CustomIcon: React.FC<CustomIconProps> = ({
+const CustomIcon: React.FC<Partial<CustomIconProps>> = ({
   type: IconComponent,
   name,
   color,
