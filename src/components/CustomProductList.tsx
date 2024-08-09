@@ -34,7 +34,7 @@ export default function CustomProductList({
         </CustomText>
       </Pressable>
       {disabled ? (
-        <CustomText className="text-center text-4xl color-yellow-400 absolute">
+        <CustomText className="text-center text-4xl color-gold absolute">
           Agregado al carrito
         </CustomText>
       ) : null}

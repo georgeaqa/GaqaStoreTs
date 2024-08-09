@@ -14,7 +14,7 @@ export default function CustomButton({
   return (
     <Pressable
       onPress={onPress}
-      className="w-full rounded-full bg-primary p-2 border-2 border-black active:opacity-20"
+      className="w-full rounded-full bg-primary p-2 border-2 active:opacity-20"
     >
       <CustomText className="text-center text-white">{children}</CustomText>
     </Pressable>

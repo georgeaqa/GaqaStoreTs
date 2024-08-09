@@ -61,7 +61,9 @@ export default function ProductsScreen() {
       {isLoading ? (
         <ActivityIndicator size="large" className="color-primary" />
       ) : filteredCharacters.length === 0 ? (
-        <CustomText> No se encontraron resultados. </CustomText>
+        <CustomText className="text-primary">
+          No se encontraron resultados.
+        </CustomText>
       ) : (
         <FlatList
           data={filteredCharacters}

@@ -11,6 +11,7 @@ module.exports = {
         primary: "#FF0000",
         secondary: "#000000",
         tertiary: "#FFFFFF",
+        gold: "#E5B80B",
       },
       aspectRatio: {
         "4/3": "4/3",

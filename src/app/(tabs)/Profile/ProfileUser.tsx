@@ -16,7 +16,7 @@ export default function ProfileUser() {
   };
 
   return (
-    <View>
+    <View className="flex-1 items-center justify-center p-1 bg-white">
       <CustomText>{user?.id}</CustomText>
       <CustomButton onPress={handleLogOut}>Cerrar Sesión</CustomButton>
     </View>

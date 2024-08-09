@@ -46,7 +46,7 @@ export default function ProductDetailsScreen() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center gap-3 p-1 bg-white">
+    <View className="flex-1 items-center justify-center bg-black">
       {isLoading ? (
         <>
           <Stack.Screen options={{ title: "Cargando..." }} />
@@ -55,17 +55,19 @@ export default function ProductDetailsScreen() {
       ) : (
         <>
           <Stack.Screen options={{ title: character?.characterName }} />
-          <Image
-            source={{ uri: character?.characterImage }}
-            className="w-full aspect-3/4"
-            resizeMode="contain"
-          />
-          <CustomText className="text-2xl">
-            {"Precio: S/ " + character?.characterPrice}
-          </CustomText>
-          <CustomButton onPress={handleAddToCart}>
-            Agregar al carrito
-          </CustomButton>
+          <View className="flex-1 w-full items-center justify-center gap-8 m-2 p-1 bg-white rounded-3xl ">
+            <Image
+              source={{ uri: character?.characterImage }}
+              className="w-full aspect-3/4"
+              resizeMode="contain"
+            />
+            <CustomText className="text-2xl text-primary">
+              {"Precio: S/ " + character?.characterPrice + ".00"}
+            </CustomText>
+            <CustomButton onPress={handleAddToCart}>
+              Agregar al carrito
+            </CustomButton>
+          </View>
         </>
       )}
     </View>

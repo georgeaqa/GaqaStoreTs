@@ -1,7 +1,7 @@
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList, Text, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Stack } from "expo-router";
-import { CustomButton } from "@/src/components";
+import { CustomButton, CustomText } from "@/src/components";
 import { CustomCartDetail } from "@/src/components";
 
 import React from "react";
@@ -14,17 +14,25 @@ export default function ShoppingCartScreen() {
   };
 
   return (
-    <View className="flex-1 items-center gap-3 bg-white">
+    <View className="flex-1 items-center bg-white justify-between">
       <Stack.Screen options={{ title: "Carrito de compras" }} />
-      <FlatList
-        data={cartCharacters}
-        renderItem={renderItemCartDetail}
-        keyExtractor={(item: any) => item.characterId}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-      />
-      <Text>total: {total}</Text>
+      {cartCharacters.length > 0 ? (
+        <FlatList
+          data={cartCharacters}
+          renderItem={renderItemCartDetail}
+          keyExtractor={(item: any) => item.characterId}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+        />
+      ) : (
+        <View className="flex-1 items-center justify-center">
+          <CustomText className="text-primary">
+            No tienes productos en tu carrito.
+          </CustomText>
+        </View>
+      )}
+      <CustomButton>Precio total: S/{total}.00</CustomButton>
     </View>
   );
 }

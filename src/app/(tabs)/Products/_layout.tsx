@@ -6,6 +6,7 @@ export default function ProductsLayout() {
       screenOptions={{
         headerTitleAlign: "center",
         headerTitleStyle: { fontFamily: "Agbalumo", color: "#FF0000" },
+        animation: "slide_from_right",
       }}
     />
   );
