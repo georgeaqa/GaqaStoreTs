@@ -1,16 +1,22 @@
 import { View, FlatList, Text, ScrollView } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Stack } from "expo-router";
 import { CustomButton, CustomText } from "@/src/components";
-import { CustomCartDetail } from "@/src/components";
-
+import { CustomProductList } from "@/src/components";
 import React from "react";
 export default function ShoppingCartScreen() {
   const cartCharacters = useSelector((state: any) => state.cart.cartCharacters);
   const total = useSelector((state: any) => state.cart.total);
 
   const renderItemCartDetail = ({ item }: any) => {
-    return <CustomCartDetail item={item} />;
+    return (
+      <CustomProductList
+        onPress={() => {}}
+        item={item}
+        disabled={true}
+        mode="cart"
+      />
+    );
   };
 
   return (

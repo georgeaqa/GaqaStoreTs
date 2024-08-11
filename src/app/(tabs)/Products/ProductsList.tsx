@@ -43,6 +43,7 @@ export default function ProductsScreen() {
         item={item}
         onPress={() => router.push(route)}
         disabled={disabled}
+        mode="list"
       />
     );
   };
