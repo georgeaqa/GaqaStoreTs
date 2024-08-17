@@ -1,5 +1,4 @@
 import { supabase } from "./supabase";
-import { Alert } from "react-native";
 
 type authSupabaseProps = {
   email: string;
@@ -18,11 +17,9 @@ export async function sign_up_with_password({
 
     if (error) {
       throw new Error(error.message);
-    } else {
-      Alert.alert("Registro exitoso", "¡Gracias por registrarte!");
     }
   } catch (error: any) {
-    Alert.alert("Error al registrarse", error.message);
+    throw new Error(error.message);
   }
 }
 
@@ -48,6 +45,6 @@ export async function log_out() {
   try {
     await supabase.auth.signOut();
   } catch (error: any) {
-    Alert.alert("Error al desconectarse:", error.message);
+    throw new Error(error.message);
   }
 }

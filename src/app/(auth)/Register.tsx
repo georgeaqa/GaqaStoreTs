@@ -3,16 +3,24 @@ import { CustomButton, CustomInput } from "@/src/components";
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "@/src/constants";
 import { sign_up_with_password } from "@/src/lib/authSupabase";
-import React from "react";
+import { CustomModal } from "@/src/components";
+import React, { useState } from "react";
 
 export default function RegisterScreen() {
   const { control, handleSubmit, watch } = useForm();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const pwd = watch("password");
-  const handleSignUpWithPassword = (data: any) => {
-    sign_up_with_password({
-      email: data.email,
-      password: data.password,
-    });
+  const handleSignUpWithPassword = async (data: any) => {
+    try {
+      await sign_up_with_password({
+        email: data.email,
+        password: data.password,
+      });
+    } catch (error: any) {
+      setShowModal(true);
+      setModalMessage("¡Correo electronico ya existe!");
+    }
   };
 
   return (
@@ -51,6 +59,11 @@ export default function RegisterScreen() {
       <CustomButton onPress={handleSubmit(handleSignUpWithPassword)}>
         Registrarse
       </CustomButton>
+      <CustomModal
+        visible={showModal}
+        onPressCloseModal={() => setShowModal(false)}
+        modalMessage={modalMessage}
+      />
     </View>
   );
 }

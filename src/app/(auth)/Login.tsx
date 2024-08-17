@@ -19,9 +19,7 @@ export default function LoginScreen() {
       });
     } catch (error: any) {
       setShowModal(true);
-      error.message === "Invalid login credentials"
-        ? setModalMessage("Correo electronico o contraseña incorrectos")
-        : null;
+      setModalMessage("¡Correo electronico o contraseña incorrectos!");
     }
   };
   return (
