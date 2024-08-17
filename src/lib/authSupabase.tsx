@@ -38,11 +38,9 @@ export async function sign_in_with_password({
 
     if (error) {
       throw new Error(error.message);
-    } else {
-      Alert.alert("Inicio de sesión exitoso");
     }
   } catch (error: any) {
-    Alert.alert("Error al iniciar sesión:", error.message);
+    throw new Error(error.message);
   }
 }
 

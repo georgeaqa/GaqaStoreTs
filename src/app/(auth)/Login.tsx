@@ -1,19 +1,28 @@
 import { Image, View } from "react-native";
-import { CustomButton, CustomInput } from "@/src/components";
+import { CustomButton, CustomInput, CustomModal } from "@/src/components";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "@/src/constants";
 import { sign_in_with_password } from "@/src/lib/authSupabase";
-import React from "react";
+import React, { useState } from "react";
 
 export default function LoginScreen() {
   const { control, handleSubmit } = useForm();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
-  const onSubmit = (data: any) => {
-    sign_in_with_password({
-      email: data.email,
-      password: data.password,
-    });
+  const onSubmit = async (data: any) => {
+    try {
+      await sign_in_with_password({
+        email: data.email,
+        password: data.password,
+      });
+    } catch (error: any) {
+      setShowModal(true);
+      error.message === "Invalid login credentials"
+        ? setModalMessage("Correo electronico o contraseña incorrectos")
+        : null;
+    }
   };
   return (
     <View className="flex-1 items-center justify-center gap-3 p-1 bg-white">
@@ -52,6 +61,11 @@ export default function LoginScreen() {
       <CustomButton onPress={() => router.push("/ForgotPassword")}>
         Recuperar Contraseña
       </CustomButton>
+      <CustomModal
+        visible={showModal}
+        onPressCloseModal={() => setShowModal(false)}
+        modalMessage={modalMessage}
+      />
     </View>
   );
 }
