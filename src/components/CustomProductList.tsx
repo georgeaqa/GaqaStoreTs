@@ -54,13 +54,13 @@ export default function CustomProductList({
           <CustomText className="text-center text-2xl color-primary">
             {item.characterName}
           </CustomText>
-          { mode === "order" ? (
+          {mode === "order" ? (
             <>
               <CustomText className="color-primary">
                 {"Cantidad: " + item.quantity}
               </CustomText>
               <CustomText className="color-primary">
-                {"Precio: S/ " + item.characterPrice.toFixed(2)}
+                Precio x Und: S/{item.characterPrice.toFixed(2)}
               </CustomText>
               <CustomText className="color-primary">
                 {"Precio Total: S/ " +
@@ -71,7 +71,7 @@ export default function CustomProductList({
           {mode === "cart" ? (
             <>
               <CustomText className="color-primary">
-                {"Precio: S/ " + item.characterPrice.toFixed(2)}
+                Precio x Und: S/{item.characterPrice.toFixed(2)}
               </CustomText>
               <View className="flex-row gap-2 items-center">
                 <Pressable
@@ -109,8 +109,8 @@ export default function CustomProductList({
                 </Pressable>
               </View>
               <CustomText className="color-primary">
-                {"Precio Total: S/ " +
-                  (item.quantity * item.characterPrice).toFixed(2)}
+                Precio Total: S/
+                {(item.quantity * item.characterPrice).toFixed(2)}
               </CustomText>
             </>
           ) : null}

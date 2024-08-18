@@ -25,7 +25,10 @@ export default function CustomHomeMenu() {
       />
       <CustomText>{user?.email}</CustomText>
 
-      <Pressable className="w-full flex-row gap-2 border-b-2 border-black active:opacity-20">
+      <Pressable
+        className="w-full flex-row gap-2 border-b-2 border-black active:opacity-20"
+        onPress={() => router.push("/Home/Profile/UserProfile")}
+      >
         <CustomIcon name="profile" type={Icons.AntDesign} />
         <CustomText>Perfil</CustomText>
         <CustomIcon

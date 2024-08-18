@@ -39,6 +39,12 @@ export default function OrderDetailScreen() {
     );
   };
 
+  const sumTotal = (cartCharacters: any[]) => {
+    return cartCharacters
+      .map((character: any) => character.characterPrice * character.quantity)
+      .reduce((a, b) => a + b, 0);
+  };
+
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <Stack.Screen
@@ -55,8 +61,11 @@ export default function OrderDetailScreen() {
           contentContainerStyle={{ gap: 10 }}
           showsVerticalScrollIndicator={false}
         >
-          <CustomText className="text-center color-primary border-b-2 border-primary pb-2 mx-1">
+          <CustomText className="text-center color-primary">
             {orderId}
+          </CustomText>
+          <CustomText className="text-center color-primary ">
+            Precio total del pedido: S/{sumTotal(orderDetail).toFixed(2)}
           </CustomText>
           <FlatList
             data={orderDetail}

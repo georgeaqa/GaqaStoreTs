@@ -1,5 +1,5 @@
 import { View, FlatList, ActivityIndicator } from "react-native";
-import { Stack,router } from "expo-router";
+import { Stack, router } from "expo-router";
 import { get_orders } from "@/src/lib/orderSupabase";
 import { useAuth } from "@/src/providers/Authprovider";
 import { CustomOrdersList, CustomText } from "@/src/components";
@@ -25,7 +25,12 @@ export default function OrdersScreen() {
   }, [orders]);
 
   const renderItemOrder = ({ item }: any) => {
-    return <CustomOrdersList item={item} onPress={() => router.push(`/Home/Orders/${item.id}`)} />;
+    return (
+      <CustomOrdersList
+        item={item}
+        onPress={() => router.push(`/Home/Orders/${item.id}`)}
+      />
+    );
   };
 
   return (
