@@ -27,7 +27,7 @@ export async function save_order({
   }
 }
 
-export async function get_order({ user_id }: Partial<orderSupabaseProps>) {
+export async function get_orders({ user_id }: Partial<orderSupabaseProps>) {
   try {
     const { data, error } = await supabase
       .from("orders")
@@ -45,7 +45,9 @@ export async function get_order({ user_id }: Partial<orderSupabaseProps>) {
   }
 }
 
-export async function get_order_detail({ order_id }: Partial<orderSupabaseProps>) {
+export async function get_order_detail({
+  order_id,
+}: Partial<orderSupabaseProps>) {
   try {
     const { data, error } = await supabase
       .from("orders")

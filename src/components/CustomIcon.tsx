@@ -39,7 +39,7 @@ interface CustomIconProps {
   name: string;
   color: string;
   size: number;
-  style: string;
+  style: any;
 }
 
 const CustomIcon: React.FC<Partial<CustomIconProps>> = ({

@@ -14,7 +14,7 @@ type CustomProductListProps = {
   item: any;
   onPress: () => void;
   disabled: boolean;
-  mode: "cart" | "list";
+  mode: "cart" | "list" | "order";
 };
 export default function CustomProductList({
   item,
@@ -54,10 +54,24 @@ export default function CustomProductList({
           <CustomText className="text-center text-2xl color-primary">
             {item.characterName}
           </CustomText>
-          {disabled && mode === "cart" ? (
+          { mode === "order" ? (
             <>
               <CustomText className="color-primary">
-                {"Precio: S/ " + item.characterPrice + ".00"}
+                {"Cantidad: " + item.quantity}
+              </CustomText>
+              <CustomText className="color-primary">
+                {"Precio: S/ " + item.characterPrice.toFixed(2)}
+              </CustomText>
+              <CustomText className="color-primary">
+                {"Precio Total: S/ " +
+                  (item.quantity * item.characterPrice).toFixed(2)}
+              </CustomText>
+            </>
+          ) : null}
+          {mode === "cart" ? (
+            <>
+              <CustomText className="color-primary">
+                {"Precio: S/ " + item.characterPrice.toFixed(2)}
               </CustomText>
               <View className="flex-row gap-2 items-center">
                 <Pressable
@@ -94,6 +108,10 @@ export default function CustomProductList({
                   />
                 </Pressable>
               </View>
+              <CustomText className="color-primary">
+                {"Precio Total: S/ " +
+                  (item.quantity * item.characterPrice).toFixed(2)}
+              </CustomText>
             </>
           ) : null}
         </View>

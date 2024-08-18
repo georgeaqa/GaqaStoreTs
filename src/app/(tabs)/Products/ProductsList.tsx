@@ -1,4 +1,4 @@
-import { View, ActivityIndicator, FlatList } from "react-native";
+import { View, ActivityIndicator, FlatList, ScrollView } from "react-native";
 import { Stack, router } from "expo-router";
 import { get_characters } from "@/src/lib/characterSupabase";
 import { CustomProductList, CustomText } from "@/src/components";
@@ -66,14 +66,17 @@ export default function ProductsScreen() {
           No se encontraron resultados.
         </CustomText>
       ) : (
-        <FlatList
-          data={filteredCharacters}
-          renderItem={renderItemCharacter}
-          keyExtractor={(item: any) => item.characterId}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-        />
+        <ScrollView className="w-full">
+          <FlatList
+            data={filteredCharacters}
+            renderItem={renderItemCharacter}
+            keyExtractor={(item: any) => item.characterId}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            scrollEnabled={false}
+          />
+        </ScrollView>
       )}
     </View>
   );

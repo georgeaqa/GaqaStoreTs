@@ -12,10 +12,10 @@ export default function ForgotPasswordScreen() {
         name="email"
         control={control}
         rules={{
-          required: "Este campo es requerido",
+          required: "Este campo es requerido.",
           pattern: {
             value: EMAIL_REGEX.email_regex,
-            message: "Formato de correo incorrecto",
+            message: "Formato de correo incorrecto.",
           },
         }}
         placeholder="Correo electronico"

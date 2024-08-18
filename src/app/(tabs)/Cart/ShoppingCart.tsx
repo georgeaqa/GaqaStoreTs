@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Stack } from "expo-router";
 import {
@@ -49,14 +49,17 @@ export default function ShoppingCartScreen() {
     <View className="flex-1 items-center bg-white justify-between">
       <Stack.Screen options={{ title: "Carrito de compras" }} />
       {cartCharacters.length > 0 ? (
-        <FlatList
-          data={cartCharacters}
-          renderItem={renderItemCartDetail}
-          keyExtractor={(item: any) => item.characterId}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-        />
+        <ScrollView className="w-full">
+          <FlatList
+            data={cartCharacters}
+            renderItem={renderItemCartDetail}
+            keyExtractor={(item: any) => item.characterId}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            scrollEnabled={false}
+          />
+        </ScrollView>
       ) : (
         <View className="flex-1 items-center justify-center">
           <CustomText className="text-primary">
@@ -65,13 +68,13 @@ export default function ShoppingCartScreen() {
         </View>
       )}
       <CustomButton onPress={() => setShowModal(true)}>
-        Precio total: S/{total}.00
+        Precio total del pedido: S/{total.toFixed(2)}
       </CustomButton>
 
       {cartCharacters.length === 0 ? (
         <CustomModal
           visible={showModal}
-          modalMessage="No tienes productos en tu carrito."
+          modalMessage="¡No tienes productos en tu carrito!"
           onPressCloseModal={() => setShowModal(!showModal)}
         />
       ) : (
@@ -79,7 +82,7 @@ export default function ShoppingCartScreen() {
           visible={showModal}
           onPressOk={onPressOk}
           onPressNo={onPressNo}
-          modalMessage="¿Estás seguro de que desea confirmar el pedido?"
+          modalMessage="¿Desea confirmar la compra?"
         />
       )}
     </View>

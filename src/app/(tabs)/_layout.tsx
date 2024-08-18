@@ -11,7 +11,7 @@ export default function TabsLayout() {
   }
   const tabs = [
     {
-      name: "Profile",
+      name: "Home",
       type: Icons.Ionicons,
       activeIcon: "home",
       inActiveIcon: "home-outline",
@@ -36,6 +36,7 @@ export default function TabsLayout() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarActiveTintColor: "#FF0000",
       }}
     >
       {tabs.map((tab, index) => (

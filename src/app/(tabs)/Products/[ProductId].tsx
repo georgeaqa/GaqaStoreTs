@@ -62,7 +62,7 @@ export default function ProductDetailsScreen() {
               resizeMode="contain"
             />
             <CustomText className="text-2xl text-primary">
-              {"Precio: S/ " + character?.characterPrice + ".00"}
+              {"Precio: S/ " + character?.characterPrice.toFixed(2)}
             </CustomText>
             <CustomButton onPress={handleAddToCart}>
               Agregar al carrito

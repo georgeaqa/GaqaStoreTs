@@ -32,7 +32,7 @@ export default function RegisterScreen() {
           required: "Este campo es requerido",
           pattern: {
             value: EMAIL_REGEX.email_regex,
-            message: "Formato de correo incorrecto",
+            message: "Formato de correo incorrecto.",
           },
         }}
         placeholder="Correo electronico"
@@ -41,7 +41,7 @@ export default function RegisterScreen() {
         name="password"
         control={control}
         rules={{
-          required: "Este campo es requerido",
+          required: "Este campo es requerido.",
         }}
         secureTextEntry={true}
         placeholder="Contraseña"
@@ -51,7 +51,7 @@ export default function RegisterScreen() {
         control={control}
         rules={{
           validate: (value: string) =>
-            value === pwd || "las contraseñas no coinciden",
+            value === pwd || "las contraseñas no coinciden.",
         }}
         secureTextEntry={true}
         placeholder="Repetir Contraseña"
