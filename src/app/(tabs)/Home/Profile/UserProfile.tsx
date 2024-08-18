@@ -1,4 +1,4 @@
-import { View, Image } from "react-native";
+import { View, Image, ActivityIndicator } from "react-native";
 import { useAuth } from "@/src/providers/Authprovider";
 import { CustomText } from "@/src/components";
 import { Stack } from "expo-router";
@@ -7,38 +7,69 @@ import { get_profile } from "@/src/lib/profileSupabase";
 import React, { useEffect, useState } from "react";
 
 interface ProfileProps {
+  id: string;
+  username: string;
+  full_name: string;
   avatar_url: string;
 }
 
 export default function UserProfileScreen() {
   const { user } = useAuth();
   const [profile, setProfile] = useState<ProfileProps | null>(null);
-  const [data, setData] = useState("");
+  const [url, setUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const fetchProfile = async () => {
-      const data = await get_profile({ user_id: user?.id });
-      setProfile(data[0]);
-    };
+    async function fetchProfile() {
+      try {
+        const data = await get_profile({ user_id: user?.id });
+        setProfile(data[0]);
+      } catch (error: any) {
+        console.error("Error fetching profile:", error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-    const fetchAvatarUrl = async () => {
-      const { data } = supabase.storage
-        .from("avatars")
-        .getPublicUrl(profile?.avatar_url as string);
+    async function fetchAvatarUrl() {
+      if (profile?.avatar_url) {
+        const { data } = await supabase.storage
+          .from("avatars")
+          .createSignedUrl(profile?.avatar_url as string, 3600);
 
-      setData(data.publicUrl);
-    };
+        setUrl(data?.signedUrl as string);
+      } else {
+        const { data } = await supabase.storage
+          .from("avatars")
+          .createSignedUrl("logo.png", 3600);
+
+        setUrl(data?.signedUrl as string);
+      }
+    }
 
     fetchProfile();
     fetchAvatarUrl();
-  }, [profile?.avatar_url, user?.id]);
+  }, [profile?.avatar_url]);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white">
+    <View className="flex-1 items-center justify-center bg-white p-1">
       <Stack.Screen options={{ title: "Perfil" }} />
-      {data ? (
-        <Image source={{ uri: data }} className="w-20 h-20 rounded-full" />
-      ) : null}
-      <CustomText className="text-center color-primary">{user?.id}</CustomText>
+      {isLoading ? (
+        <ActivityIndicator size="large" className="color-primary" />
+      ) : (
+        url && (
+          <View className="flex-1 w-full gap-2">
+            <Image source={{ uri: url }} className="w-full aspect-square" />
+            <CustomText className="">ID: {profile?.id}</CustomText>
+            <CustomText className="">
+              Correo electronico: {user?.email}
+            </CustomText>
+            <CustomText className="">Username: {profile?.username}</CustomText>
+            <CustomText className=" ">
+              Nombre completo: {profile?.full_name}
+            </CustomText>
+          </View>
+        )
+      )}
     </View>
   );
 }

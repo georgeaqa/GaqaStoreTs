@@ -54,7 +54,7 @@ export default function CustomProductList({
           <CustomText className="text-center text-2xl color-primary">
             {item.characterName}
           </CustomText>
-          {mode === "order" ? (
+          {mode === "order" && (
             <>
               <CustomText className="color-primary">
                 {"Cantidad: " + item.quantity}
@@ -67,8 +67,8 @@ export default function CustomProductList({
                   (item.quantity * item.characterPrice).toFixed(2)}
               </CustomText>
             </>
-          ) : null}
-          {mode === "cart" ? (
+          )}
+          {mode === "cart" && (
             <>
               <CustomText className="color-primary">
                 Precio x Und: S/{item.characterPrice.toFixed(2)}
@@ -113,14 +113,14 @@ export default function CustomProductList({
                 {(item.quantity * item.characterPrice).toFixed(2)}
               </CustomText>
             </>
-          ) : null}
+          )}
         </View>
       </Pressable>
-      {disabled && mode === "list" ? (
+      {disabled && mode === "list" && (
         <CustomText className="text-center text-4xl color-gold absolute">
           Agregado al carrito
         </CustomText>
-      ) : null}
+      )}
     </View>
   );
 }
