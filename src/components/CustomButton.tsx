@@ -1,22 +1,29 @@
-import { Pressable } from "react-native";
+import { Pressable, PressableProps } from "react-native";
 import CustomText from "./CustomText";
-import React, { ReactNode } from "react";
+import React from "react";
 
-type CustomButtonProps = {
-  onPress: () => void;
-  children: ReactNode;
+type CustomButtonProps = PressableProps & {
+  classNameButton: string;
+  title: string;
+  classNameTitle: string;
 };
 
 export default function CustomButton({
   onPress,
-  children,
+  title,
+  classNameButton,
+  classNameTitle,
+  ...props
 }: Partial<CustomButtonProps>) {
   return (
     <Pressable
       onPress={onPress}
-      className="w-full rounded-full bg-primary p-2 border-2 active:opacity-20"
+      className={`w-full rounded-full justify-center items-center p-2 gap-2 active:opacity-20 ${classNameButton}`}
+      {...props}
     >
-      <CustomText className="text-center text-white">{children}</CustomText>
+      <CustomText className={`text-center ${classNameTitle}`}>
+        {title}
+      </CustomText>
     </Pressable>
   );
 }

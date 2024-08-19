@@ -20,7 +20,11 @@ export default function ForgotPasswordScreen() {
         }}
         placeholder="Correo electronico"
       />
-      <CustomButton>Enviar Instrucciones</CustomButton>
+      <CustomButton
+        classNameButton="bg-primary"
+        title="Enviar"
+        classNameTitle="text-white"
+      />
     </View>
   );
 }

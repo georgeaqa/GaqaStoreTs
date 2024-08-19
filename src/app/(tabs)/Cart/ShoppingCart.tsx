@@ -67,9 +67,12 @@ export default function ShoppingCartScreen() {
           </CustomText>
         </View>
       )}
-      <CustomButton onPress={() => setShowModal(true)}>
-        Precio total del pedido: S/{total.toFixed(2)}
-      </CustomButton>
+      <CustomButton
+        classNameButton="bg-primary"
+        title={`Precio total del pedido: S/${total.toFixed(2)}`}
+        classNameTitle="text-white"
+        onPress={() => setShowModal(true)}
+      />
 
       {cartCharacters.length === 0 ? (
         <CustomModal

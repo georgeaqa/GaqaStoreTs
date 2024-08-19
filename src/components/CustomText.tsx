@@ -1,9 +1,8 @@
-import { Text } from "react-native";
-import React, { ReactNode } from "react";
+import { Text, TextProps } from "react-native";
+import React from "react";
 
-type CustomTextProps = {
+type CustomTextProps = TextProps & {
   className: string;
-  children: ReactNode;
 };
 
 export default function CustomText({

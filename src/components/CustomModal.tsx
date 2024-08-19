@@ -1,10 +1,9 @@
-import { View, Modal, Text } from "react-native";
+import { View, Modal, ModalProps } from "react-native";
 import CustomText from "./CustomText";
 import CustomButton from "./CustomButton";
 import React from "react";
 
-type CustomModalProps = {
-  visible: boolean;
+type CustomModalProps = ModalProps & {
   onPressOk: () => void;
   onPressNo: () => void;
   onPressCloseModal: () => void;
@@ -12,23 +11,42 @@ type CustomModalProps = {
 };
 
 export default function CustomModal({
-  visible,
   onPressOk,
   onPressNo,
   onPressCloseModal,
   modalMessage,
+  ...props
 }: Partial<CustomModalProps>) {
   return (
-    <Modal transparent={true} visible={visible} animationType="fade">
+    <Modal transparent={true} animationType="fade" {...props}>
       <View className="bg-black/20 flex-1 items-center justify-center">
         <View className=" w-[80%]  bg-white rounded-3xl p-4 items-center justify-center gap-3 border-2 border-black">
           <CustomText className="text-center">{modalMessage}</CustomText>
           <View className="w-[50%] flex-row gap-2 justify-center ">
-            {onPressOk && <CustomButton onPress={onPressOk}>SI</CustomButton>}
-            {onPressNo && <CustomButton onPress={onPressNo}>NO</CustomButton>}
+            {onPressOk && (
+              <CustomButton
+                classNameButton="bg-success"
+                title="SI"
+                classNameTitle="text-white"
+                onPress={onPressOk}
+              />
+            )}
+            {onPressNo && (
+              <CustomButton
+                classNameButton="bg-primary"
+                title="NO"
+                classNameTitle="text-white"
+                onPress={onPressNo}
+              />
+            )}
           </View>
           {onPressCloseModal && (
-            <CustomButton onPress={onPressCloseModal}>Cerrar</CustomButton>
+            <CustomButton
+              classNameButton="bg-primary"
+              title="Cerrar"
+              classNameTitle="text-white"
+              onPress={onPressCloseModal}
+            />
           )}
         </View>
       </View>

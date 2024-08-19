@@ -55,7 +55,7 @@ export default function ProductDetailsScreen() {
       ) : (
         <>
           <Stack.Screen options={{ title: character?.characterName }} />
-          <View className="flex-1 w-full items-center justify-center gap-8 m-2 p-1 bg-white rounded-3xl ">
+          <View className="flex-1 w-full items-center justify-center gap-8 m-1 p-1 bg-white rounded-3xl ">
             <Image
               source={{ uri: character?.characterImage }}
               className="w-full aspect-3/4"
@@ -64,9 +64,12 @@ export default function ProductDetailsScreen() {
             <CustomText className="text-2xl text-primary">
               {"Precio: S/ " + character?.characterPrice.toFixed(2)}
             </CustomText>
-            <CustomButton onPress={handleAddToCart}>
-              Agregar al carrito
-            </CustomButton>
+            <CustomButton
+              classNameButton=" bg-primary"
+              title="Agregar al carrito"
+              classNameTitle="text-white"
+              onPress={handleAddToCart}
+            />
           </View>
         </>
       )}

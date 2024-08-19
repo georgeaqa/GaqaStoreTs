@@ -42,6 +42,7 @@ export default function RegisterScreen() {
         control={control}
         rules={{
           required: "Este campo es requerido.",
+          minLength: { value: 6, message: "Contraseña demasiado corta" },
         }}
         secureTextEntry={true}
         placeholder="Contraseña"
@@ -52,13 +53,18 @@ export default function RegisterScreen() {
         rules={{
           validate: (value: string) =>
             value === pwd || "las contraseñas no coinciden.",
+          minLength: { value: 6, message: "Contraseña demasiado corta" },
         }}
         secureTextEntry={true}
         placeholder="Repetir Contraseña"
       />
-      <CustomButton onPress={handleSubmit(handleSignUpWithPassword)}>
-        Registrarse
-      </CustomButton>
+      <CustomButton
+        classNameButton="bg-primary"
+        title="Registrarse"
+        classNameTitle="text-white"
+        onPress={handleSubmit(handleSignUpWithPassword)}
+      />
+
       <CustomModal
         visible={showModal}
         onPressCloseModal={() => setShowModal(false)}

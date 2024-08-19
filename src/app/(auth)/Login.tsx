@@ -46,19 +46,32 @@ export default function LoginScreen() {
         control={control}
         rules={{
           required: "Este campo es requerido.",
+          minLength: { value: 6, message: "Contraseña demasiado corta" },
         }}
         secureTextEntry={true}
         placeholder="Contraseña"
       />
-      <CustomButton onPress={handleSubmit(onSubmit)}>
-        Iniciar Sesión
-      </CustomButton>
-      <CustomButton onPress={() => router.push("/Register")}>
-        Registrarse
-      </CustomButton>
-      <CustomButton onPress={() => router.push("/ForgotPassword")}>
-        Recuperar Contraseña
-      </CustomButton>
+      <CustomButton
+        classNameButton="bg-primary"
+        title="Iniciar Sesión"
+        classNameTitle="text-white"
+        onPress={handleSubmit(onSubmit)}
+      />
+
+      <CustomButton
+        classNameButton="bg-primary"
+        title="Registrarse"
+        classNameTitle="text-white"
+        onPress={() => router.push("/Register")}
+      />
+
+      <CustomButton
+        classNameButton="bg-primary"
+        title="Recuperar Contraseña"
+        classNameTitle="text-white"
+        onPress={() => router.push("/ForgotPassword")}
+      />
+
       <CustomModal
         visible={showModal}
         onPressCloseModal={() => setShowModal(false)}

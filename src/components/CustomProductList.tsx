@@ -81,7 +81,7 @@ export default function CustomProductList({
                   <CustomIcon
                     name="pluscircleo"
                     type={Icons.AntDesign}
-                    color="#00FF00"
+                    color="#008000"
                   />
                 </Pressable>
                 <CustomText className="color-primary">

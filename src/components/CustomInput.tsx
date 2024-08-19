@@ -1,22 +1,19 @@
-import { TextInput, View } from "react-native";
-import { Controller } from "react-hook-form";
+import { TextInput, TextInputProps, View } from "react-native";
+import { Controller, ControllerProps } from "react-hook-form";
 import CustomText from "./CustomText";
 import React from "react";
 
-type CustomInputProps = {
-  control: any;
-  name: any;
-  rules: any;
-  placeholder: string;
-  secureTextEntry: boolean;
-};
+type CustomInputProps = TextInputProps &
+  ControllerProps & {
+    name: any;
+  };
 
 export default function CustomInput({
   control,
   name,
   rules = {},
   placeholder,
-  secureTextEntry = false,
+  ...props
 }: Partial<CustomInputProps>) {
   return (
     <Controller
@@ -34,7 +31,7 @@ export default function CustomInput({
             onChangeText={onChange}
             onBlur={onBlur}
             value={value}
-            secureTextEntry={secureTextEntry}
+            {...props}
           />
           {error && (
             <CustomText className="text-primary">{error.message}</CustomText>
