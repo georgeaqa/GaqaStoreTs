@@ -1,9 +1,9 @@
 import { View, Image, ActivityIndicator } from "react-native";
 import { useAuth } from "@/src/providers/Authprovider";
-import { CustomText } from "@/src/components";
-import { Stack } from "expo-router";
-import { supabase } from "@/src/lib/supabase";
+import { CustomText, CustomButton } from "@/src/components";
+import { Stack, router } from "expo-router";
 import { get_profile } from "@/src/lib/profileSupabase";
+import { get_avatar_url } from "@/src/lib/avatarSupabase";
 import React, { useEffect, useState } from "react";
 
 interface ProfileProps {
@@ -31,19 +31,12 @@ export default function UserProfileScreen() {
     }
 
     async function fetchAvatarUrl() {
-      if (profile?.avatar_url) {
-        const { data } = await supabase.storage
-          .from("avatars")
-          .createSignedUrl(profile?.avatar_url as string, 3600);
-
-        setUrl(data?.signedUrl as string);
-      } else {
-        const { data } = await supabase.storage
-          .from("avatars")
-          .createSignedUrl("logo.png", 3600);
-
-        setUrl(data?.signedUrl as string);
+      let avatar_url: string | any = profile?.avatar_url;
+      if (!avatar_url) {
+        avatar_url = "logo.png";
       }
+      const { signedUrl } = await get_avatar_url({ avatar_url });
+      setUrl(signedUrl);
     }
 
     fetchProfile();
@@ -58,15 +51,20 @@ export default function UserProfileScreen() {
       ) : (
         url && (
           <View className="flex-1 w-full gap-2">
-            <Image source={{ uri: url }} className="w-full aspect-square" />
-            <CustomText className="">ID: {profile?.id}</CustomText>
-            <CustomText className="">
-              Correo electronico: {user?.email}
-            </CustomText>
-            <CustomText className="">Username: {profile?.username}</CustomText>
-            <CustomText className=" ">
-              Nombre completo: {profile?.full_name}
-            </CustomText>
+            <Image
+              source={{ uri: url }}
+              className="w-full aspect-square"
+              resizeMode="contain"
+            />
+            <CustomText>ID: {profile?.id}</CustomText>
+            <CustomText>Correo electronico: {user?.email}</CustomText>
+            <CustomText>Username: {profile?.username}</CustomText>
+            <CustomText>Nombre completo: {profile?.full_name}</CustomText>
+            <CustomButton
+              onPress={() => router.push("/Home/Profile/EditProfile")}
+            >
+              Editar perfil
+            </CustomButton>
           </View>
         )
       )}
